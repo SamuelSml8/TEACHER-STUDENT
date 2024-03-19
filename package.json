@@ -1,0 +1,18 @@
+{
+  "name": "teacher-student",
+  "version": "1.0.0",
+  "description": "API REST en Node.js que utilice MongoDB para gestionar información de estudiantes y profesores, implementando operaciones CRUD (Crear, Leer, Actualizar, Eliminar) para ambas entidades y estableciendo una relación entre estudiantes y profesores.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx nodemon ./src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.3",
+    "mongoose": "^8.2.2",
+    "nodemon": "^3.1.0"
+  }
+}
