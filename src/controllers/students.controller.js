@@ -1,4 +1,5 @@
 const Student = require("../models/student.model.js");
+const Teacher = require("../models/teacher.model.js");
 
 const createStudent = async (req, res) => {
   try {
@@ -140,10 +141,40 @@ const deleteStudent = async (req, res) => {
   }
 };
 
+const teacherAlumns = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const teacherFound = await Teacher.findById(id);
+
+    if (teacherFound == null) {
+      return res.status(404).json({
+        ok: false,
+        message: "Teacher not found",
+        data: null,
+      });
+    }
+
+    const studentsFound = await Student.find({ teacherId: req.params.id });
+    res.status(200).json({
+      ok: true,
+      message: `${teacherFound.name}'s Students`,
+      data: studentsFound,
+    });
+  } catch (error) {
+    console.log("Error getting teacher's alumns ", error);
+    res.status(500).json({
+      ok: false,
+      message: "Error Internal Server",
+      data: null,
+    });
+  }
+};
+
 module.exports = {
   createStudent,
   getStudents,
   getStudentById,
   updateStudent,
   deleteStudent,
+  teacherAlumns,
 };
