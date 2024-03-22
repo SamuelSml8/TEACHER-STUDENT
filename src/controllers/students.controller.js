@@ -52,10 +52,10 @@ const getStudents = async (req, res) => {
 
 const getStudentById = async (req, res) => {
   try {
-    const studentFound = await Student.findById({ _id: req.params.id });
+    const studentFound = await Student.findById({ _id: req.params.id }).populate("teacherId");
 
     if (!studentFound) {
-      res.status(404).json({
+      return res.status(404).json({
         ok: false,
         message: "Student not found",
         data: null,
@@ -154,14 +154,9 @@ const teacherAlumns = async (req, res) => {
       });
     }
 
-    console.log(teacherFound);
-    console.log(req.params.id)
     const studentsFound = await Student.find({
       teacherId: teacherFound._id,
     });
-    
-
-
 
     res.status(200).json({
       ok: true,
